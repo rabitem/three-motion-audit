@@ -1,6 +1,6 @@
 {
   "name": "three-motion-audit",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Catch animation glitches in three.js and react-three-fiber scenes: teleports, path kinks, rotation pops, handoff seams and flicker, frame by frame.",
   "keywords": [
     "three",

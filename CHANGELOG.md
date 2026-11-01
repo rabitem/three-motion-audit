@@ -7,6 +7,19 @@ the public API; the entry says how.
 
 ## [Unreleased]
 
+## [0.1.1] - 2026-11-01
+
+No changes to the library's API or behaviour.
+
+### Changed
+
+- Published from the release workflow through npm trusted publishing, with provenance.
+
+### Fixed
+
+- `npm run check:package` no longer crashes under npm 12, which prints `npm pack --json` as an
+  object instead of an array.
+
 ## [0.1.0] - 2026-11-01
 
 ### Added
@@ -27,5 +40,6 @@ the public API; the entry says how.
 - `three-motion-audit/playwright`: `waitForMotionAudit`, `runScenario`, `auditStatus`,
   `expectNoAnomalies`, `expectAnomaly` and `attachReport`.
 
-[Unreleased]: https://github.com/rabitem/three-motion-audit/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/rabitem/three-motion-audit/compare/v0.1.1...HEAD
+[0.1.1]: https://github.com/rabitem/three-motion-audit/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/rabitem/three-motion-audit/releases/tag/v0.1.0
