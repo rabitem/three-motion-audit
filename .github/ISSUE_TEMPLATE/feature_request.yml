@@ -1,0 +1,25 @@
+name: Feature request
+description: Suggest a detector, an adapter, an option or a change to an existing one.
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: The glitch or workflow the audit does not cover today, with an example.
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: How it should work, from the point of view of someone writing a test.
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: A custom detector or `audit.flag` may already cover it; say why it is not enough.

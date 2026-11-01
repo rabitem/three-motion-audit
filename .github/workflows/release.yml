@@ -1,0 +1,53 @@
+name: Release
+
+# Publishes to npm with provenance when a GitHub release is published. Publishing stays off until a
+# maintainer configures npm trusted publishing for this repository and workflow, then sets the
+# repository variable NPM_PUBLISH_ENABLED to "true". Until then the job verifies and packs only.
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+permissions: {}
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    name: Verify and publish
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment: npm
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '24'
+          registry-url: 'https://registry.npmjs.org'
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run build
+      - run: npm run check:package
+      - name: Check that the tag matches package.json
+        if: github.event_name == 'release'
+        env:
+          TAG: ${{ github.event.release.tag_name }}
+        run: node -e "const v = require('./package.json').version; if (process.env.TAG !== 'v' + v) { console.error('Tag ' + process.env.TAG + ' does not match version ' + v); process.exit(1); }"
+      - name: Pack
+        run: npm pack --dry-run
+      - name: Publish
+        if: github.event_name == 'release' && vars.NPM_PUBLISH_ENABLED == 'true'
+        # Pre-releases (a version with a hyphen) go to the "next" dist-tag, never to "latest".
+        run: |
+          version=$(node -p "require('./package.json').version")
+          if [[ "$version" == *-* ]]; then tag=next; else tag=latest; fi
+          npm publish --provenance --access public --tag "$tag"

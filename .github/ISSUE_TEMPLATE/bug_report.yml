@@ -1,0 +1,65 @@
+name: Bug report
+description: A detector misses a glitch, flags smooth motion, or an adapter misbehaves.
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report this. Please search the open issues first.
+        Security problems do not belong here: report them privately at https://github.com/rabitem/three-motion-audit/security/advisories/new.
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: The anomaly you got (or did not get), with the report entry exactly as printed.
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behaviour
+      description: What the audit should have reported, and why the motion is smooth or broken.
+    validations:
+      required: true
+
+  - type: textarea
+    id: repro
+    attributes:
+      label: Reproduction scene
+      description: |
+        The smallest scene that shows it: a CodeSandbox or StackBlitz link, a repository, or the
+        samples themselves (`audit.frame(...)` calls with ids, positions and times). Include the
+        audit options you passed.
+      render: ts
+    validations:
+      required: true
+
+  - type: input
+    id: versions
+    attributes:
+      label: Versions
+      description: three-motion-audit, three, @react-three/fiber, react and @playwright/test, as installed.
+      placeholder: three-motion-audit 0.1.0, three 0.187.0, @react-three/fiber 9.8.2, react 19.3.1
+    validations:
+      required: true
+
+  - type: dropdown
+    id: clock
+    attributes:
+      label: Clock
+      options:
+        - Real clock
+        - Virtual clock (play)
+        - Virtual clock (fast)
+        - Virtual clock (paused)
+        - A clock of my own
+    validations:
+      required: true
+
+  - type: input
+    id: environment
+    attributes:
+      label: Browser or runtime
+      placeholder: Chromium 142 in Playwright on Ubuntu 24.04, Node 24

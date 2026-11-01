@@ -1,0 +1,110 @@
+{
+  "name": "three-motion-audit",
+  "version": "0.1.0",
+  "description": "Catch animation glitches in three.js and react-three-fiber scenes: teleports, path kinks, rotation pops, handoff seams and flicker, frame by frame.",
+  "keywords": [
+    "three",
+    "threejs",
+    "react-three-fiber",
+    "r3f",
+    "animation",
+    "testing",
+    "playwright",
+    "glitch",
+    "regression",
+    "webgl"
+  ],
+  "license": "MIT",
+  "author": "rabitem",
+  "homepage": "https://github.com/rabitem/three-motion-audit#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rabitem/three-motion-audit.git"
+  },
+  "bugs": {
+    "url": "https://github.com/rabitem/three-motion-audit/issues"
+  },
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./three": {
+      "types": "./dist/three/index.d.ts",
+      "default": "./dist/three/index.js"
+    },
+    "./r3f": {
+      "types": "./dist/r3f/index.d.ts",
+      "default": "./dist/r3f/index.js"
+    },
+    "./clock": {
+      "types": "./dist/clock/index.d.ts",
+      "default": "./dist/clock/index.js"
+    },
+    "./playwright": {
+      "types": "./dist/playwright/index.d.ts",
+      "default": "./dist/playwright/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "src",
+    "!src/**/*.test.ts",
+    "!src/test-support"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json && tsc -p examples/tsconfig.json",
+    "test": "vitest run",
+    "check:package": "publint && attw --pack . --profile esm-only && node scripts/check-size.mjs",
+    "examples": "vite --config examples/vite.config.ts",
+    "e2e": "playwright test",
+    "prepublishOnly": "npm run build"
+  },
+  "peerDependencies": {
+    "@playwright/test": ">=1.40.0",
+    "@react-three/fiber": ">=8.0.0",
+    "react": ">=18.0.0",
+    "three": ">=0.150.0"
+  },
+  "peerDependenciesMeta": {
+    "@playwright/test": {
+      "optional": true
+    },
+    "@react-three/fiber": {
+      "optional": true
+    },
+    "react": {
+      "optional": true
+    },
+    "three": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@arethetypeswrong/cli": "^0.18.5",
+    "@playwright/test": "^1.64.1",
+    "@react-three/fiber": "^9.8.2",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@types/three": "^0.187.0",
+    "@vitejs/plugin-react": "^6.1.2",
+    "publint": "^0.3.25",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "three": "^0.187.0",
+    "typescript": "^6.0.3",
+    "vite": "^8.3.5",
+    "vitest": "^5.0.5"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  }
+}

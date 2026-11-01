@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "jsx": "react-jsx",
+    "strict": true,
+    "isolatedModules": true,
+    "skipLibCheck": true,
+    "noEmit": true,
+    "types": [],
+    "paths": {
+      "three-motion-audit": ["../src/index.ts"],
+      "three-motion-audit/*": ["../src/*/index.ts"]
+    }
+  },
+  "include": ["three", "r3f", "shared", "e2e"]
+}
