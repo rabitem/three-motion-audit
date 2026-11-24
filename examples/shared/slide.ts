@@ -26,6 +26,8 @@ export function createSlide() {
   const elapsed = () => (startedAt === null ? 0 : performance.now() - startedAt);
 
   const scenario: Scenario = async (ctx) => {
+    // The bridge can be ready before React has mounted the canvas and its probe.
+    await ctx.frames(1);
     startedAt = performance.now();
     ctx.event('slide started', { pop });
     await ctx.waitUntil(() => elapsed() >= SLIDE_MS + LIFT_MS, { label: 'the slide to finish' });
